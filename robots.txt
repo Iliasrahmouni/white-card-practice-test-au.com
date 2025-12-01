@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://white-card-practice-test-au.com/sitemap.xml
+
+
