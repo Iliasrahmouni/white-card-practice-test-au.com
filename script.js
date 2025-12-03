@@ -115,9 +115,8 @@ let isAnswered = false;
 
 // Initialize Quiz
 function initQuiz() {
-    // Select 40 random questions from the pool
-    const shuffled = [...questions].sort(() => Math.random() - 0.5);
-    currentQuestions = shuffled.slice(0, 40);
+    // Use the pre-generated random questions from questions.js
+    currentQuestions = currentExamQuestions;
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
@@ -144,7 +143,7 @@ function displayQuestion() {
     document.getElementById('total-questions').textContent = currentQuestions.length;
 
     // Display question
-    document.getElementById('question-text').textContent = question.text;
+    document.getElementById('question-text').textContent = question.question;
 
     // Clear and populate options
     const optionsContainer = document.getElementById('options-container');
@@ -178,19 +177,19 @@ function handleAnswer(selectedIndex, question) {
     userAnswers.push({
         questionIndex: currentQuestionIndex,
         selected: selectedIndex,
-        correct: question.correct,
-        isCorrect: selectedIndex === question.correct
+        correct: question.answer,
+        isCorrect: selectedIndex === question.answer
     });
 
     // Check if correct
-    if (selectedIndex === question.correct) {
+    if (selectedIndex === question.answer) {
         // Correct answer
         optionButtons[selectedIndex].classList.add('correct');
         score++;
     } else {
         // Wrong answer
         optionButtons[selectedIndex].classList.add('incorrect');
-        optionButtons[question.correct].classList.add('correct');
+        optionButtons[question.answer].classList.add('correct');
     }
 
     // Disable all buttons
